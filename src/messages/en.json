@@ -1,0 +1,213 @@
+{
+  "common": {
+    "brand": "Internity",
+    "nav": {
+      "home": "Home",
+      "portfolio": "Portfolio",
+      "about": "About",
+      "contact": "Contact"
+    },
+    "cta": {
+      "get_started": "Get Started",
+      "view_work": "View Our Work",
+      "contact_us": "Contact Us",
+      "learn_more": "Learn More"
+    },
+    "language": {
+      "en": "EN",
+      "ar": "عربي"
+    }
+  },
+  "home": {
+    "hero": {
+      "tagline": "Premium Video Production",
+      "headline": "We Craft Stories That Move",
+      "description": "From concept to screen, Internity delivers cinematic video production that elevates brands across the UAE and beyond.",
+      "cta_primary": "View Our Work",
+      "cta_secondary": "Start a Project"
+    },
+    "clients": {
+      "title": "Trusted by Leading Brands"
+    },
+    "services": {
+      "tagline": "What We Do",
+      "title": "Our Services",
+      "description": "Comprehensive video production services tailored to elevate your brand.",
+      "corporate": {
+        "title": "Corporate Video",
+        "description": "Professional corporate films that communicate your brand story with clarity and impact."
+      },
+      "commercial": {
+        "title": "Commercial Ads",
+        "description": "High-impact commercials crafted to captivate audiences and drive measurable results."
+      },
+      "documentary": {
+        "title": "Documentary",
+        "description": "Compelling documentary films that uncover truth and inspire meaningful change."
+      },
+      "event": {
+        "title": "Event Coverage",
+        "description": "Comprehensive event documentation that captures every significant moment."
+      },
+      "animation": {
+        "title": "Animation & VFX",
+        "description": "Stunning motion graphics and visual effects that bring concepts to life."
+      },
+      "social": {
+        "title": "Social Media Content",
+        "description": "Scroll-stopping social content optimized for engagement and shareability."
+      }
+    },
+    "featured": {
+      "tagline": "Selected Work",
+      "title": "Featured Projects",
+      "description": "A curated selection of our most impactful productions.",
+      "view_all": "View All Projects"
+    },
+    "stats": {
+      "tagline": "Our Impact",
+      "title": "Numbers That Speak",
+      "projects": "Projects Completed",
+      "clients": "Happy Clients",
+      "awards": "Awards Won",
+      "years": "Years of Experience"
+    },
+    "testimonials": {
+      "tagline": "Client Voices",
+      "title": "What Our Clients Say",
+      "items": [
+        {
+          "quote": "Internity transformed our vision into a cinematic masterpiece. Their attention to detail and creative excellence is unmatched.",
+          "author": "Sarah Al Maktoum",
+          "role": "Marketing Director",
+          "company": "Emirates Group"
+        },
+        {
+          "quote": "Working with Internity was seamless from start to finish. They delivered beyond our expectations with remarkable efficiency.",
+          "author": "Ahmed Hassan",
+          "role": "CEO",
+          "company": "Dubai Properties"
+        },
+        {
+          "quote": "The quality of production and storytelling sets Internity apart. They truly understand how to connect with audiences.",
+          "author": "Fatima Al Zaabi",
+          "role": "Brand Manager",
+          "company": "Etisalat"
+        }
+      ]
+    },
+    "cta": {
+      "title": "Ready to Tell Your Story?",
+      "description": "Let's create something extraordinary together. Start your project with Internity today.",
+      "button": "Start Your Project"
+    }
+  },
+  "portfolio": {
+    "meta_title": "Portfolio",
+    "meta_description": "Explore our video production portfolio showcasing corporate films, commercials, documentaries, and more.",
+    "tagline": "Our Work",
+    "title": "Portfolio",
+    "description": "A curated collection of our finest video productions spanning corporate, commercial, documentary, and creative content.",
+    "filter_all": "All",
+    "categories": {
+      "CORPORATE": "Corporate",
+      "COMMERCIAL": "Commercial",
+      "DOCUMENTARY": "Documentary",
+      "EVENT": "Event",
+      "SOCIAL": "Social Media",
+      "ANIMATION": "Animation"
+    },
+    "view_project": "View Project"
+  },
+  "case_study": {
+    "overview": "Project Overview",
+    "client": "Client",
+    "category": "Category",
+    "year": "Year",
+    "challenge": "The Challenge",
+    "approach": "Our Approach",
+    "result": "The Result",
+    "gallery": "Behind the Scenes",
+    "impact": "Impact & Results",
+    "related": "Related Projects",
+    "next": "Next Project",
+    "back": "Back to Portfolio"
+  },
+  "contact": {
+    "meta_title": "Contact Us",
+    "meta_description": "Get in touch with Internity for your next video production project.",
+    "tagline": "Get In Touch",
+    "title": "Let's Work Together",
+    "description": "Tell us about your project and we'll get back to you within 24 hours.",
+    "form": {
+      "name": "Full Name",
+      "name_placeholder": "John Doe",
+      "email": "Email Address",
+      "email_placeholder": "john@company.com",
+      "phone": "Phone Number",
+      "phone_placeholder": "+971 50 XXX XXXX",
+      "company": "Company",
+      "company_placeholder": "Your Company",
+      "service": "Service Interested In",
+      "service_placeholder": "Select a service",
+      "service_options": {
+        "corporate": "Corporate Video",
+        "commercial": "Commercial Ads",
+        "documentary": "Documentary",
+        "event": "Event Coverage",
+        "animation": "Animation & VFX",
+        "social": "Social Media Content"
+      },
+      "budget": "Estimated Budget",
+      "budget_placeholder": "Select budget range",
+      "budget_options": {
+        "small": "Under $10,000",
+        "medium": "$10,000 - $50,000",
+        "large": "$50,000 - $100,000",
+        "enterprise": "$100,000+"
+      },
+      "message": "Tell Us About Your Project",
+      "message_placeholder": "Describe your project, goals, and timeline...",
+      "submit": "Send Message",
+      "submitting": "Sending...",
+      "success": "Thank you! We'll be in touch within 24 hours.",
+      "error": "Something went wrong. Please try again."
+    },
+    "info": {
+      "title": "Contact Information",
+      "address_label": "Visit Us",
+      "address": "Dubai Media City, Building 7\nDubai, United Arab Emirates",
+      "email_label": "Email Us",
+      "email": "hello@internity.ae",
+      "phone_label": "Call Us",
+      "phone": "+971 4 XXX XXXX",
+      "hours_label": "Working Hours",
+      "hours": "Sun - Thu: 9:00 AM - 6:00 PM"
+    }
+  },
+  "about": {
+    "meta_title": "About Us",
+    "tagline": "Our Story",
+    "title": "About Internity",
+    "description": "We are a team of passionate filmmakers, storytellers, and visual artists dedicated to creating exceptional video content that drives results."
+  },
+  "footer": {
+    "tagline": "Crafting visual stories that inspire, engage, and drive results.",
+    "quick_links": "Quick Links",
+    "services": "Services",
+    "contact_info": "Contact",
+    "follow_us": "Follow Us",
+    "copyright": "© 2026 Internity. All rights reserved.",
+    "social": {
+      "instagram": "Instagram",
+      "youtube": "YouTube",
+      "linkedin": "LinkedIn",
+      "vimeo": "Vimeo"
+    }
+  },
+  "not_found": {
+    "title": "Lost in the Edit",
+    "description": "The scene you're looking for doesn't exist. Let's get you back on track.",
+    "button": "Back to Home"
+  }
+}

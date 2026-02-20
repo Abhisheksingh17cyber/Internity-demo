@@ -1,0 +1,137 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Project {
+  id                String          @id @default(cuid())
+  slug              String          @unique
+  title             String
+  brief             String
+  challenge         String?         @db.Text
+  approach          String?         @db.Text
+  result            String?         @db.Text
+  titleAr           String?         @map("title_ar")
+  briefAr           String?         @map("brief_ar")
+  challengeAr       String?         @db.Text @map("challenge_ar")
+  approachAr        String?         @db.Text @map("approach_ar")
+  resultAr          String?         @db.Text @map("result_ar")
+  client            String?
+  category          ProjectCategory @default(CORPORATE)
+  year              Int
+  featured          Boolean         @default(false)
+  order             Int             @default(0)
+  videoUrl          String?         @map("video_url")
+  videoPreviewUrl   String?         @map("video_preview_url")
+  thumbnailUrl      String          @map("thumbnail_url")
+  challengeImageUrl String?         @map("challenge_image_url")
+  approachImageUrl  String?         @map("approach_image_url")
+  resultImageUrl    String?         @map("result_image_url")
+  galleryImages     GalleryImage[]
+  metrics           ProjectMetric[]
+  publishedAt       DateTime?       @map("published_at")
+  createdAt         DateTime        @default(now()) @map("created_at")
+  updatedAt         DateTime        @updatedAt @map("updated_at")
+
+  @@index([category])
+  @@index([featured])
+  @@index([publishedAt])
+  @@map("projects")
+}
+
+model GalleryImage {
+  id        String    @id @default(cuid())
+  url       String
+  alt       String?
+  altAr     String?   @map("alt_ar")
+  type      MediaType @default(IMAGE)
+  order     Int       @default(0)
+  project   Project   @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  projectId String    @map("project_id")
+
+  @@index([projectId])
+  @@map("gallery_images")
+}
+
+model ProjectMetric {
+  id        String  @id @default(cuid())
+  label     String
+  labelAr   String? @map("label_ar")
+  value     Int
+  suffix    String?
+  prefix    String?
+  order     Int     @default(0)
+  project   Project @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  projectId String  @map("project_id")
+
+  @@index([projectId])
+  @@map("project_metrics")
+}
+
+model ContactSubmission {
+  id        String        @id @default(cuid())
+  name      String
+  email     String
+  phone     String?
+  company   String?
+  service   String?
+  budget    String?
+  message   String        @db.Text
+  locale    String        @default("en")
+  status    ContactStatus @default(NEW)
+  notes     String?       @db.Text
+  createdAt DateTime      @default(now()) @map("created_at")
+  updatedAt DateTime      @updatedAt @map("updated_at")
+
+  @@index([status])
+  @@index([createdAt])
+  @@map("contact_submissions")
+}
+
+model SiteSetting {
+  id        String      @id @default(cuid())
+  key       String      @unique
+  value     String      @db.Text
+  valueAr   String?     @db.Text @map("value_ar")
+  type      SettingType @default(TEXT)
+  group     String      @default("general")
+  createdAt DateTime    @default(now()) @map("created_at")
+  updatedAt DateTime    @updatedAt @map("updated_at")
+
+  @@index([group])
+  @@map("site_settings")
+}
+
+enum ProjectCategory {
+  CORPORATE
+  COMMERCIAL
+  DOCUMENTARY
+  EVENT
+  SOCIAL
+  ANIMATION
+}
+
+enum MediaType {
+  IMAGE
+  VIDEO
+}
+
+enum ContactStatus {
+  NEW
+  READ
+  RESPONDED
+  ARCHIVED
+}
+
+enum SettingType {
+  TEXT
+  HTML
+  URL
+  NUMBER
+  BOOLEAN
+  JSON
+}
