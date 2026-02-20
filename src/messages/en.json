@@ -24,7 +24,8 @@
       "headline": "We Craft Stories That Move",
       "description": "From concept to screen, Internity delivers cinematic video production that elevates brands across the UAE and beyond.",
       "cta_primary": "View Our Work",
-      "cta_secondary": "Start a Project"
+      "cta_secondary": "Play Showreel",
+      "scroll_label": "Scroll to Explore"
     },
     "clients": {
       "title": "Trusted by Leading Brands"
@@ -64,6 +65,11 @@
       "description": "A curated selection of our most impactful productions.",
       "view_all": "View All Projects"
     },
+    "inline_cta": {
+      "title": "Have a Vision? Let's Bring It to Life.",
+      "description": "We partner with brands to create cinematic content that drives results.",
+      "button": "Start a Conversation"
+    },
     "stats": {
       "tagline": "Our Impact",
       "title": "Numbers That Speak",
@@ -96,7 +102,12 @@
         }
       ]
     },
+    "awards": {
+      "tagline": "Recognition",
+      "title": "Awards & Accolades"
+    },
     "cta": {
+      "tagline": "Let's Create Together",
       "title": "Ready to Tell Your Story?",
       "description": "Let's create something extraordinary together. Start your project with Internity today.",
       "button": "Start Your Project"
@@ -117,7 +128,12 @@
       "SOCIAL": "Social Media",
       "ANIMATION": "Animation"
     },
-    "view_project": "View Project"
+    "view_project": "View Project",
+    "load_more": "Load More Projects",
+    "cta_tagline": "Have a Project in Mind?",
+    "cta_title": "Let's Create Something Remarkable",
+    "cta_description": "From concept to delivery, we bring your vision to life with cinematic precision.",
+    "cta_button": "Get in Touch"
   },
   "case_study": {
     "overview": "Project Overview",
@@ -125,12 +141,20 @@
     "category": "Category",
     "year": "Year",
     "challenge": "The Challenge",
+    "strategy": "The Strategy",
     "approach": "Our Approach",
     "result": "The Result",
     "gallery": "Behind the Scenes",
     "impact": "Impact & Results",
+    "key_metrics": "Key Metrics",
     "related": "Related Projects",
     "next": "Next Project",
+    "next_project": "Next Project",
+    "view_project": "View Project",
+    "start_project": "Start Your Project",
+    "cta_title": "Ready to Create Something Like This?",
+    "cta_description": "Let's discuss how we can bring your vision to life with the same level of craft and precision.",
+    "cta_button": "Get in Touch",
     "back": "Back to Portfolio"
   },
   "contact": {

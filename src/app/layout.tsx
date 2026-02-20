@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Inter, Cairo } from "next/font/google";
+import { StructuredData } from "@/components/shared/StructuredData";
 import "./globals.css";
 
 const inter = Inter({
@@ -26,6 +27,13 @@ export const metadata: Metadata = {
     images: ["/images/og-image.jpg"],
     type: "website",
   },
+  twitter: {
+    card: "summary_large_image",
+    title: "Internity - Premium Video Production | UAE",
+    description:
+      "Award-winning video production company based in the UAE. Corporate films, commercials, documentaries, and creative content.",
+    images: ["/images/og-image.jpg"],
+  },
 };
 
 export default function RootLayout({
@@ -36,6 +44,7 @@ export default function RootLayout({
   return (
     <html suppressHydrationWarning>
       <body className={`${inter.variable} ${cairo.variable} antialiased`}>
+        <StructuredData />
         {children}
       </body>
     </html>
