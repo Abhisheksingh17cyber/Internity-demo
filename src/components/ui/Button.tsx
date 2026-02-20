@@ -23,9 +23,9 @@ export function Button({
     "inline-flex items-center justify-center font-medium transition-all duration-300 rounded-full focus:outline-none focus:ring-2 focus:ring-gold/50 focus:ring-offset-2 focus:ring-offset-background";
 
   const variants = {
-    gold: "bg-gold text-background hover:bg-gold-light active:bg-gold-dark",
+    gold: "bg-gold text-background hover:bg-gold-light hover:shadow-lg hover:shadow-gold/20 active:bg-gold-dark",
     outline:
-      "border border-gold text-gold hover:bg-gold hover:text-background",
+      "border border-gold text-gold hover:bg-gold hover:text-background hover:shadow-lg hover:shadow-gold/10",
     ghost: "text-gold hover:bg-gold/10",
     white:
       "bg-foreground text-background hover:bg-foreground-muted",

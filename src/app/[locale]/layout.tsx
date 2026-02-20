@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 import { routing } from "@/i18n/routing";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
+import { SmoothScroll } from "@/components/shared/SmoothScroll";
 
 type Props = {
   children: React.ReactNode;
@@ -23,9 +24,11 @@ export default async function LocaleLayout({ children, params }: Props) {
   return (
     <div dir={isRTL ? "rtl" : "ltr"} lang={locale} className={isRTL ? "font-arabic" : "font-sans"}>
       <NextIntlClientProvider messages={messages}>
-        <Navbar />
-        <main className="min-h-screen">{children}</main>
-        <Footer />
+        <SmoothScroll>
+          <Navbar />
+          <main className="min-h-screen">{children}</main>
+          <Footer />
+        </SmoothScroll>
       </NextIntlClientProvider>
     </div>
   );

@@ -7,11 +7,19 @@ import { cn } from "@/lib/utils";
 
 interface VideoBackgroundProps {
   src: string;
+  srcWebm?: string;
   poster?: string;
   className?: string;
+  preloadStrategy?: "auto" | "metadata" | "none";
 }
 
-export function VideoBackground({ src, poster, className }: VideoBackgroundProps) {
+export function VideoBackground({
+  src,
+  srcWebm,
+  poster,
+  className,
+  preloadStrategy = "metadata",
+}: VideoBackgroundProps) {
   const videoRef = useRef<HTMLVideoElement>(null);
   const { ref: containerRef, isIntersecting } = useIntersectionObserver({
     threshold: 0.25,
@@ -46,9 +54,10 @@ export function VideoBackground({ src, poster, className }: VideoBackgroundProps
         loop
         playsInline
         poster={poster}
-        preload="metadata"
+        preload={preloadStrategy}
         className="h-full w-full object-cover"
       >
+        {srcWebm && <source src={srcWebm} type="video/webm" />}
         <source src={src} type="video/mp4" />
       </video>
     </div>

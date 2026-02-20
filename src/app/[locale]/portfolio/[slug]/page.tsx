@@ -5,16 +5,58 @@ import { Button } from "@/components/ui/Button";
 import { ScrollReveal } from "@/components/ui/ScrollReveal";
 import { AnimatedCounter } from "@/components/ui/AnimatedCounter";
 import Image from "next/image";
-import { ArrowLeft } from "lucide-react";
+import { ArrowLeft, ArrowRight, Eye, TrendingUp, Award, Calendar } from "lucide-react";
+
+const METRIC_ICONS: Record<string, React.ComponentType<{ className?: string }>> = {
+  Views: Eye,
+  Engagement: TrendingUp,
+  Awards: Award,
+  "Shoot Days": Calendar,
+  Films: Eye,
+  Shares: TrendingUp,
+  Impressions: Eye,
+  Bookings: TrendingUp,
+  ROI: TrendingUp,
+  Months: Calendar,
+  Screenings: Eye,
+  Rating: Award,
+  Completion: TrendingUp,
+  Signups: TrendingUp,
+  Clips: Eye,
+  Features: Award,
+};
 
 // Placeholder project data
 const PROJECTS: Record<string, {
   slug: string; title: string; titleAr: string; brief: string;
   category: string; client: string; year: number;
-  thumbnailUrl: string; challenge: string; approach: string; result: string;
+  thumbnailUrl: string; challenge: string; strategy?: string; approach: string; result: string;
+  videoUrl?: string;
   metrics: { label: string; value: number; suffix: string }[];
   gallery: string[];
 }> = {
+  "luxury-automotive-brand-film": {
+    slug: "luxury-automotive-brand-film",
+    title: "Luxury Automotive Brand Film – Driven by Precision",
+    titleAr: "فيلم علامة السيارات الفاخرة – مدفوع بالدقة",
+    brief: "A cinematic brand film capturing the fusion of engineering excellence and emotional storytelling for a premium automotive launch in the UAE.",
+    category: "COMMERCIAL",
+    client: "Prestige Motors UAE",
+    year: 2025,
+    thumbnailUrl: "/images/placeholder-thumb-1.jpg",
+    challenge: "Prestige Motors UAE was launching a new flagship model and needed a brand film that went beyond typical car commercials. The goal was to evoke emotion, portray craftsmanship, and position the brand as a symbol of modern luxury in the Middle East market. The film needed to appeal to both Emirati and international audiences while maintaining a cinematic, non-salesy tone.",
+    strategy: "We developed a concept rooted in the idea of \"Precision in Motion\" — drawing parallels between the engineering of the vehicle and the artistry of filmmaking itself. The visual narrative follows a single day from dawn to night across iconic UAE landscapes, with the car as the silent protagonist.",
+    approach: "Shot over 12 days across Dubai, Abu Dhabi, and the Liwa Desert using RED V-Raptor cameras, FPV drone rigs, and a custom car-mount stabilizer system. The team included a director, 2 cinematographers, a Steadicam operator, a drone pilot, a sound designer, and a 15-person production crew. Post-production included color grading with a Hollywood colorist, original score composition, and cinematic sound design.",
+    result: "The film premiered at a private launch event for 400 VIP guests and was distributed across YouTube, Instagram, LinkedIn, and in-showroom displays. It generated 4.2 million views across platforms in the first month, increased test-drive bookings by 38%, and was awarded \"Best Branded Film\" at the Gulf Media Awards.",
+    videoUrl: "/videos/showreel.mp4",
+    metrics: [
+      { label: "Views", value: 4200000, suffix: "M" },
+      { label: "Engagement", value: 38, suffix: "%" },
+      { label: "Awards", value: 3, suffix: "" },
+      { label: "Shoot Days", value: 12, suffix: "" },
+    ],
+    gallery: ["/images/placeholder-thumb-1.jpg", "/images/placeholder-thumb-2.jpg", "/images/placeholder-thumb-3.jpg", "/images/placeholder-thumb-1.jpg"],
+  },
   "emirates-brand-film": {
     slug: "emirates-brand-film", title: "Emirates Brand Film", titleAr: "فيلم علامة الإمارات التجارية",
     brief: "A cinematic brand film showcasing the essence of luxury travel.",
@@ -83,6 +125,16 @@ const PROJECTS: Record<string, {
   },
 };
 
+const PROJECT_ORDER = [
+  "luxury-automotive-brand-film",
+  "emirates-brand-film",
+  "dubai-expo-highlights",
+  "luxury-auto-commercial",
+  "heritage-documentary",
+  "fintech-product-launch",
+  "fashion-week-coverage",
+];
+
 export async function generateStaticParams() {
   return Object.keys(PROJECTS).map((slug) => ({ slug }));
 }
@@ -94,7 +146,16 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   return {
     title: project.title,
     description: project.brief,
+    openGraph: {
+      images: [project.thumbnailUrl],
+    },
   };
+}
+
+function getNextProject(currentSlug: string) {
+  const idx = PROJECT_ORDER.indexOf(currentSlug);
+  const nextIdx = (idx + 1) % PROJECT_ORDER.length;
+  return PROJECTS[PROJECT_ORDER[nextIdx]];
 }
 
 export default async function CaseStudyPage({ params }: { params: Promise<{ slug: string; locale: string }> }) {
@@ -104,11 +165,12 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
 
   const t = await getTranslations("case_study");
   const pt = await getTranslations("portfolio");
+  const nextProject = getNextProject(slug);
 
   return (
     <article>
       {/* Hero */}
-      <section className="relative flex min-h-[70vh] items-end overflow-hidden">
+      <section className="relative flex min-h-[80vh] items-end overflow-hidden">
         <div className="absolute inset-0">
           <Image
             src={project.thumbnailUrl}
@@ -117,27 +179,34 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
             className="object-cover"
             priority
           />
-          <div className="video-overlay absolute inset-0" />
+          <div className="video-overlay-deep absolute inset-0" />
         </div>
-        <Container className="relative z-10 pb-16 pt-40">
-          <Button variant="ghost" href="/portfolio" className="mb-6 gap-2">
-            <ArrowLeft className="h-4 w-4" />
-            {t("back")}
-          </Button>
-          <p className="mb-3 text-sm font-medium uppercase tracking-[0.25em] text-gold">
-            {pt(`categories.${project.category}`)}
-          </p>
-          <h1 className="text-4xl font-bold md:text-5xl lg:text-6xl">
-            {locale === "ar" ? project.titleAr : project.title}
-          </h1>
+        <Container className="relative z-10 pb-20 pt-40">
+          <ScrollReveal>
+            <Button variant="ghost" href="/portfolio" className="mb-8 gap-2">
+              <ArrowLeft className="h-4 w-4" />
+              {t("back")}
+            </Button>
+            <div className="flex items-center gap-4 mb-4">
+              <p className="text-sm font-medium uppercase tracking-[0.25em] text-gold">
+                {pt(`categories.${project.category}`)}
+              </p>
+              <span className="h-1 w-1 rounded-full bg-gold/50" />
+              <p className="text-sm text-foreground-muted">{project.year}</p>
+            </div>
+            <h1 className="text-4xl font-bold md:text-5xl lg:text-6xl xl:text-7xl">
+              {locale === "ar" ? project.titleAr : project.title}
+            </h1>
+            <p className="mt-6 max-w-2xl text-lg text-foreground-muted">{project.brief}</p>
+          </ScrollReveal>
         </Container>
       </section>
 
-      {/* Overview */}
-      <section className="py-16">
+      {/* Overview bar */}
+      <section className="border-b border-border bg-background-secondary py-8">
         <Container>
           <ScrollReveal>
-            <div className="grid gap-8 border-b border-border pb-12 md:grid-cols-3">
+            <div className="grid gap-8 md:grid-cols-4">
               <div>
                 <p className="mb-1 text-xs font-medium uppercase tracking-wider text-foreground-muted">{t("client")}</p>
                 <p className="font-semibold">{project.client}</p>
@@ -150,56 +219,146 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
                 <p className="mb-1 text-xs font-medium uppercase tracking-wider text-foreground-muted">{t("year")}</p>
                 <p className="font-semibold">{project.year}</p>
               </div>
+              <div>
+                <p className="mb-1 text-xs font-medium uppercase tracking-wider text-foreground-muted">{t("overview")}</p>
+                <p className="font-semibold text-gold">{project.metrics.length} {t("key_metrics")}</p>
+              </div>
             </div>
           </ScrollReveal>
         </Container>
       </section>
+
+      {/* Video Preview */}
+      {project.videoUrl && (
+        <section className="py-20">
+          <Container>
+            <ScrollReveal variant="scale">
+              <div className="relative aspect-video overflow-hidden rounded-2xl bg-background-tertiary">
+                <video
+                  controls
+                  playsInline
+                  poster={project.thumbnailUrl}
+                  preload="metadata"
+                  className="h-full w-full object-cover"
+                >
+                  <source src={project.videoUrl} type="video/mp4" />
+                </video>
+              </div>
+            </ScrollReveal>
+          </Container>
+        </section>
+      )}
 
       {/* Challenge */}
-      <section className="py-16">
+      <section className="py-20">
         <Container>
           <ScrollReveal>
-            <div className="grid items-center gap-12 md:grid-cols-2">
+            <div className="grid items-center gap-16 md:grid-cols-2">
               <div>
-                <p className="mb-3 text-sm font-medium uppercase tracking-[0.25em] text-gold">{t("challenge")}</p>
+                <p className="mb-4 text-sm font-medium uppercase tracking-[0.25em] text-gold">{t("challenge")}</p>
+                <h2 className="mb-6 text-2xl font-bold md:text-3xl">The Brief</h2>
                 <p className="text-lg leading-relaxed text-foreground-muted">{project.challenge}</p>
               </div>
-              <div className="relative aspect-video overflow-hidden rounded-2xl">
-                <Image src={project.gallery[0]} alt="Challenge" fill className="object-cover" sizes="50vw" />
+              <div className="relative aspect-[4/3] overflow-hidden rounded-2xl">
+                <Image
+                  src={project.gallery[0]}
+                  alt="Challenge"
+                  fill
+                  className="object-cover transition-transform duration-700 hover:scale-105"
+                  sizes="50vw"
+                />
               </div>
             </div>
           </ScrollReveal>
         </Container>
       </section>
 
-      {/* Approach */}
-      <section className="bg-background-secondary py-16">
+      {/* Strategy (if present) */}
+      {project.strategy && (
+        <section className="bg-background-secondary py-20">
+          <Container>
+            <ScrollReveal>
+              <div className="grid items-center gap-16 md:grid-cols-2">
+                <div className="relative aspect-[4/3] overflow-hidden rounded-2xl md:order-1">
+                  <Image
+                    src={project.gallery[1] || project.gallery[0]}
+                    alt="Strategy"
+                    fill
+                    className="object-cover transition-transform duration-700 hover:scale-105"
+                    sizes="50vw"
+                  />
+                </div>
+                <div className="md:order-2">
+                  <p className="mb-4 text-sm font-medium uppercase tracking-[0.25em] text-gold">{t("strategy")}</p>
+                  <h2 className="mb-6 text-2xl font-bold md:text-3xl">Creative Direction</h2>
+                  <p className="text-lg leading-relaxed text-foreground-muted">{project.strategy}</p>
+                </div>
+              </div>
+            </ScrollReveal>
+          </Container>
+        </section>
+      )}
+
+      {/* Approach / Execution */}
+      <section className={project.strategy ? "py-20" : "bg-background-secondary py-20"}>
         <Container>
           <ScrollReveal>
-            <div className="grid items-center gap-12 md:grid-cols-2">
-              <div className="relative aspect-video overflow-hidden rounded-2xl md:order-1">
-                <Image src={project.gallery[1]} alt="Approach" fill className="object-cover" sizes="50vw" />
-              </div>
-              <div className="md:order-2">
-                <p className="mb-3 text-sm font-medium uppercase tracking-[0.25em] text-gold">{t("approach")}</p>
+            <div className="grid items-center gap-16 md:grid-cols-2">
+              {!project.strategy && (
+                <div className="relative aspect-[4/3] overflow-hidden rounded-2xl md:order-1">
+                  <Image
+                    src={project.gallery[1] || project.gallery[0]}
+                    alt="Approach"
+                    fill
+                    className="object-cover transition-transform duration-700 hover:scale-105"
+                    sizes="50vw"
+                  />
+                </div>
+              )}
+              <div className={project.strategy ? "" : "md:order-2"}>
+                <p className="mb-4 text-sm font-medium uppercase tracking-[0.25em] text-gold">{t("approach")}</p>
+                <h2 className="mb-6 text-2xl font-bold md:text-3xl">Execution</h2>
                 <p className="text-lg leading-relaxed text-foreground-muted">{project.approach}</p>
               </div>
+              {project.strategy && (
+                <div className="relative aspect-[4/3] overflow-hidden rounded-2xl">
+                  <Image
+                    src={project.gallery[2] || project.gallery[0]}
+                    alt="Execution"
+                    fill
+                    className="object-cover transition-transform duration-700 hover:scale-105"
+                    sizes="50vw"
+                  />
+                </div>
+              )}
             </div>
           </ScrollReveal>
         </Container>
       </section>
 
       {/* Gallery */}
-      <section className="py-16">
+      <section className="py-20">
         <Container>
           <ScrollReveal>
-            <p className="mb-8 text-center text-sm font-medium uppercase tracking-[0.25em] text-gold">
+            <p className="mb-10 text-center text-sm font-medium uppercase tracking-[0.25em] text-gold">
               {t("gallery")}
             </p>
-            <div className="grid gap-4 sm:grid-cols-3">
+            <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
               {project.gallery.map((img, i) => (
-                <div key={i} className="relative aspect-video overflow-hidden rounded-xl">
-                  <Image src={img} alt={`Gallery ${i + 1}`} fill className="object-cover" sizes="33vw" />
+                <div
+                  key={i}
+                  className={`group relative overflow-hidden rounded-xl ${i === 0 && project.gallery.length > 3 ? "sm:col-span-2 sm:row-span-2" : ""}`}
+                >
+                  <div className={`relative ${i === 0 && project.gallery.length > 3 ? "aspect-square" : "aspect-video"} w-full`}>
+                    <Image
+                      src={img}
+                      alt={`Gallery ${i + 1}`}
+                      fill
+                      className="object-cover transition-transform duration-700 group-hover:scale-110"
+                      sizes={i === 0 && project.gallery.length > 3 ? "66vw" : "33vw"}
+                    />
+                    <div className="absolute inset-0 bg-background/0 transition-colors group-hover:bg-background/20" />
+                  </div>
                 </div>
               ))}
             </div>
@@ -208,11 +367,12 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
       </section>
 
       {/* Result */}
-      <section className="bg-background-secondary py-16">
+      <section className="bg-background-secondary py-20">
         <Container>
           <ScrollReveal>
             <div className="mx-auto max-w-3xl text-center">
-              <p className="mb-3 text-sm font-medium uppercase tracking-[0.25em] text-gold">{t("result")}</p>
+              <p className="mb-4 text-sm font-medium uppercase tracking-[0.25em] text-gold">{t("result")}</p>
+              <h2 className="mb-6 text-2xl font-bold md:text-3xl">The Outcome</h2>
               <p className="text-lg leading-relaxed text-foreground-muted">{project.result}</p>
             </div>
           </ScrollReveal>
@@ -220,33 +380,75 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
       </section>
 
       {/* Impact Metrics */}
-      <section className="py-16">
+      <section className="py-20">
         <Container>
           <ScrollReveal>
-            <p className="mb-8 text-center text-sm font-medium uppercase tracking-[0.25em] text-gold">
+            <p className="mb-12 text-center text-sm font-medium uppercase tracking-[0.25em] text-gold">
               {t("impact")}
             </p>
-            <div className="grid grid-cols-3 gap-8">
-              {project.metrics.map((metric) => (
-                <div key={metric.label} className="text-center">
-                  <div className="mb-2 text-3xl font-bold text-gold md:text-5xl">
-                    <AnimatedCounter value={metric.value} suffix={metric.suffix} />
-                  </div>
-                  <p className="text-sm text-foreground-muted">{metric.label}</p>
-                </div>
-              ))}
+            <div className={`grid gap-8 ${project.metrics.length === 4 ? "grid-cols-2 md:grid-cols-4" : "grid-cols-3"}`}>
+              {project.metrics.map((metric, index) => {
+                const Icon = METRIC_ICONS[metric.label];
+                return (
+                  <ScrollReveal key={metric.label} delay={index * 0.1}>
+                    <div className="text-center">
+                      {Icon && (
+                        <div className="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-gold/10 text-gold">
+                          <Icon className="h-5 w-5" />
+                        </div>
+                      )}
+                      <div className="mb-2 text-3xl font-bold text-gold md:text-5xl">
+                        <AnimatedCounter value={metric.value} suffix={metric.suffix} />
+                      </div>
+                      <p className="text-sm text-foreground-muted">{metric.label}</p>
+                    </div>
+                  </ScrollReveal>
+                );
+              })}
             </div>
           </ScrollReveal>
         </Container>
       </section>
 
-      {/* CTA */}
-      <section className="py-16">
+      {/* Gold divider */}
+      <div className="gold-divider mx-auto max-w-7xl" />
+
+      {/* CTA + Next Project */}
+      <section className="py-20">
         <Container>
-          <div className="text-center">
-            <Button variant="outline" href="/portfolio">
-              {t("back")}
-            </Button>
+          <div className="grid gap-16 md:grid-cols-2">
+            {/* Start a project CTA */}
+            <ScrollReveal>
+              <div className="rounded-2xl border border-border bg-background-secondary p-10">
+                <p className="mb-2 text-sm font-medium uppercase tracking-[0.25em] text-gold">
+                  {t("start_project")}
+                </p>
+                <h3 className="mb-4 text-2xl font-bold">{t("cta_title")}</h3>
+                <p className="mb-6 text-foreground-muted">{t("cta_description")}</p>
+                <Button variant="gold" href="/contact">
+                  {t("cta_button")}
+                </Button>
+              </div>
+            </ScrollReveal>
+
+            {/* Next Project */}
+            <ScrollReveal delay={0.1}>
+              <a
+                href={`/portfolio/${nextProject.slug}`}
+                className="group block rounded-2xl border border-border bg-background-secondary p-10 transition-all hover:border-gold/30"
+              >
+                <p className="mb-2 text-sm font-medium uppercase tracking-[0.25em] text-foreground-muted">
+                  {t("next_project")}
+                </p>
+                <h3 className="mb-4 text-2xl font-bold transition-colors group-hover:text-gold">
+                  {locale === "ar" ? nextProject.titleAr : nextProject.title}
+                </h3>
+                <p className="mb-6 text-foreground-muted">{nextProject.brief}</p>
+                <span className="inline-flex items-center gap-2 text-gold">
+                  {t("view_project")} <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+                </span>
+              </a>
+            </ScrollReveal>
           </div>
         </Container>
       </section>

@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import { Menu } from "lucide-react";
 import { useTranslations } from "next-intl";
-import { Link } from "@/i18n/navigation";
+import { Link, usePathname } from "@/i18n/navigation";
 import { cn } from "@/lib/utils";
 import { NAV_LINKS } from "@/lib/constants";
 import { Logo } from "./Logo";
@@ -13,6 +13,7 @@ import { Button } from "@/components/ui/Button";
 
 export function Navbar() {
   const t = useTranslations("common");
+  const pathname = usePathname();
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
@@ -28,9 +29,9 @@ export function Navbar() {
     <>
       <header
         className={cn(
-          "fixed top-0 z-40 w-full transition-all duration-300",
+          "fixed top-0 z-40 w-full transition-all duration-500",
           isScrolled
-            ? "bg-background/90 backdrop-blur-md border-b border-border"
+            ? "bg-background/80 backdrop-blur-xl border-b border-border/50 shadow-lg shadow-background/20"
             : "bg-transparent"
         )}
       >
@@ -40,15 +41,26 @@ export function Navbar() {
           </Link>
 
           <nav className="hidden items-center gap-8 md:flex">
-            {NAV_LINKS.map((link) => (
-              <Link
-                key={link.key}
-                href={link.href}
-                className="text-sm font-medium text-foreground-muted transition-colors hover:text-foreground"
-              >
-                {t(`nav.${link.key}`)}
-              </Link>
-            ))}
+            {NAV_LINKS.map((link) => {
+              const isActive = pathname === link.href || (link.href !== "/" && pathname.startsWith(link.href));
+              return (
+                <Link
+                  key={link.key}
+                  href={link.href}
+                  className={cn(
+                    "relative py-1 text-sm font-medium transition-colors",
+                    isActive
+                      ? "text-gold"
+                      : "text-foreground-muted hover:text-foreground"
+                  )}
+                >
+                  {t(`nav.${link.key}`)}
+                  {isActive && (
+                    <span className="absolute -bottom-1 left-0 right-0 h-px bg-gold" />
+                  )}
+                </Link>
+              );
+            })}
           </nav>
 
           <div className="hidden items-center gap-4 md:flex">
