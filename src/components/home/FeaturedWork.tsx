@@ -11,9 +11,9 @@ import { ArrowUpRight } from "lucide-react";
 
 const PLACEHOLDER_PROJECTS = [
   { slug: "emirates-brand-film", title: "Emirates Brand Film", category: "Corporate", thumb: "/images/portfolio-2.png" },
-  { slug: "dubai-expo-highlights", title: "Dubai Expo Highlights", category: "Event", thumb: "/images/placeholder-thumb-2.jpg" },
-  { slug: "luxury-auto-commercial", title: "Luxury Auto Campaign", category: "Commercial", thumb: "/images/placeholder-thumb-3.jpg" },
-  { slug: "fashion-week-coverage", title: "Fashion Week Coverage", category: "Social Media", thumb: "/images/placeholder-thumb-1.jpg" },
+  { slug: "dubai-expo-highlights", title: "Dubai Expo Highlights", category: "Event", thumb: "/images/portfolio-5.png" },
+  { slug: "luxury-auto-commercial", title: "Luxury Auto Campaign", category: "Commercial", thumb: "/images/portfolio-11.png" },
+  { slug: "fashion-week-coverage", title: "Fashion Week Coverage", category: "Social Media", thumb: "/images/portfolio-10.png" },
 ];
 
 export function FeaturedWork() {
