@@ -21,7 +21,7 @@ export function TestimonialsSection() {
   }));
 
   const next = useCallback(() => setCurrent((c) => (c + 1) % testimonials.length), [testimonials.length]);
-  const prev = () => setCurrent((c) => (c - 1 + testimonials.length) % testimonials.length);
+  const prev = useCallback(() => setCurrent((c) => (c - 1 + testimonials.length) % testimonials.length), [testimonials.length]);
 
   useEffect(() => {
     if (isPaused) return;

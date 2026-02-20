@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/Button";
 import { ScrollReveal } from "@/components/ui/ScrollReveal";
 import { AnimatedCounter } from "@/components/ui/AnimatedCounter";
 import Image from "next/image";
+import { Link } from "@/i18n/navigation";
 import { ArrowLeft, ArrowRight, Eye, TrendingUp, Award, Calendar } from "lucide-react";
 
 const METRIC_ICONS: Record<string, React.ComponentType<{ className?: string }>> = {
@@ -259,7 +260,7 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
                 <h2 className="mb-6 text-2xl font-bold md:text-3xl">The Brief</h2>
                 <p className="text-lg leading-relaxed text-foreground-muted">{project.challenge}</p>
               </div>
-              <div className="relative aspect-[4/3] overflow-hidden rounded-2xl">
+              <div className="relative aspect-4/3 overflow-hidden rounded-2xl">
                 <Image
                   src={project.gallery[0]}
                   alt="Challenge"
@@ -279,7 +280,7 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
           <Container>
             <ScrollReveal>
               <div className="grid items-center gap-16 md:grid-cols-2">
-                <div className="relative aspect-[4/3] overflow-hidden rounded-2xl md:order-1">
+                <div className="relative aspect-4/3 overflow-hidden rounded-2xl md:order-1">
                   <Image
                     src={project.gallery[1] || project.gallery[0]}
                     alt="Strategy"
@@ -305,7 +306,7 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
           <ScrollReveal>
             <div className="grid items-center gap-16 md:grid-cols-2">
               {!project.strategy && (
-                <div className="relative aspect-[4/3] overflow-hidden rounded-2xl md:order-1">
+                <div className="relative aspect-4/3 overflow-hidden rounded-2xl md:order-1">
                   <Image
                     src={project.gallery[1] || project.gallery[0]}
                     alt="Approach"
@@ -321,7 +322,7 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
                 <p className="text-lg leading-relaxed text-foreground-muted">{project.approach}</p>
               </div>
               {project.strategy && (
-                <div className="relative aspect-[4/3] overflow-hidden rounded-2xl">
+                <div className="relative aspect-4/3 overflow-hidden rounded-2xl">
                   <Image
                     src={project.gallery[2] || project.gallery[0]}
                     alt="Execution"
@@ -433,7 +434,7 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
 
             {/* Next Project */}
             <ScrollReveal delay={0.1}>
-              <a
+              <Link
                 href={`/portfolio/${nextProject.slug}`}
                 className="group block rounded-2xl border border-border bg-background-secondary p-10 transition-all hover:border-gold/30"
               >
@@ -447,7 +448,7 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
                 <span className="inline-flex items-center gap-2 text-gold">
                   {t("view_project")} <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
                 </span>
-              </a>
+              </Link>
             </ScrollReveal>
           </div>
         </Container>
