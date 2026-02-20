@@ -40,7 +40,7 @@ export function TestimonialsSection() {
 
         <ScrollReveal>
           <div className="mx-auto max-w-3xl">
-            <div className="relative min-h-[300px]">
+            <div className="relative min-h-75">
               <AnimatePresence mode="wait">
                 <motion.div
                   key={current}

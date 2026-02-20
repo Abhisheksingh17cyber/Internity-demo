@@ -12,5 +12,5 @@ export function GradientOverlay({ className, variant = "default" }: GradientOver
       ? "opacity-60 video-overlay"
       : "video-overlay";
 
-  return <div className={cn(overlayClass, "absolute inset-0 z-[1]", className)} />;
+  return <div className={cn(overlayClass, "absolute inset-0 z-1", className)} />;
 }

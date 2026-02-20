@@ -85,7 +85,7 @@ export function ProjectGrid({ projects }: ProjectGridProps) {
                   href={`/portfolio/${project.slug}`}
                   className="group block overflow-hidden rounded-2xl bg-background-secondary"
                 >
-                  <div className={`relative overflow-hidden ${isFeature ? "aspect-[16/10]" : "aspect-video"}`}>
+                  <div className={`relative overflow-hidden ${isFeature ? "aspect-16/10" : "aspect-video"}`}>
                     <Image
                       src={project.thumbnailUrl}
                       alt={project.title}
@@ -93,7 +93,7 @@ export function ProjectGrid({ projects }: ProjectGridProps) {
                       className="object-cover transition-transform duration-700 group-hover:scale-110"
                       sizes={isFeature ? "(max-width: 640px) 100vw, 66vw" : "(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"}
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-background/90 via-background/20 to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
+                    <div className="absolute inset-0 bg-linear-to-t from-background/90 via-background/20 to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
                     <div className="absolute bottom-4 right-4 flex h-10 w-10 items-center justify-center rounded-full bg-gold text-background opacity-0 transition-all duration-300 group-hover:opacity-100">
                       <ArrowUpRight className="h-4 w-4" />
                     </div>

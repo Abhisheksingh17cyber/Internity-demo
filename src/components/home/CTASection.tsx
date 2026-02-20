@@ -14,7 +14,7 @@ export function CTASection() {
       <Container>
         <ScrollReveal variant="scale">
           <div className="relative overflow-hidden rounded-3xl bg-background-tertiary px-8 py-24 text-center md:px-16">
-            <div className="absolute inset-0 bg-gradient-to-br from-gold/10 via-transparent to-gold/5" />
+            <div className="absolute inset-0 bg-linear-to-br from-gold/10 via-transparent to-gold/5" />
             <div className="absolute -left-20 -top-20 h-60 w-60 rounded-full bg-gold/5 blur-3xl" />
             <div className="absolute -bottom-20 -right-20 h-60 w-60 rounded-full bg-gold/5 blur-3xl" />
 

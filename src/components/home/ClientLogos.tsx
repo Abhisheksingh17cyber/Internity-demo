@@ -24,8 +24,8 @@ export function ClientLogos() {
 
       {/* Marquee */}
       <div className="relative">
-        <div className="absolute left-0 top-0 z-10 h-full w-20 bg-gradient-to-r from-background to-transparent" />
-        <div className="absolute right-0 top-0 z-10 h-full w-20 bg-gradient-to-l from-background to-transparent" />
+        <div className="absolute left-0 top-0 z-10 h-full w-20 bg-linear-to-r from-background to-transparent" />
+        <div className="absolute right-0 top-0 z-10 h-full w-20 bg-linear-to-l from-background to-transparent" />
         <div className="flex animate-marquee whitespace-nowrap">
           {[...CLIENTS, ...CLIENTS].map((client, i) => (
             <span

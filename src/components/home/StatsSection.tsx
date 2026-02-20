@@ -15,7 +15,7 @@ export function StatsSection() {
 
   return (
     <section className="relative overflow-hidden py-24 md:py-32">
-      <div className="absolute inset-0 bg-gradient-to-b from-background via-background-secondary/50 to-background" />
+      <div className="absolute inset-0 bg-linear-to-b from-background via-background-secondary/50 to-background" />
 
       <Container className="relative z-10">
         <SectionHeading tagline={t("tagline")} title={t("title")} />
@@ -36,7 +36,7 @@ export function StatsSection() {
                     {t(stat.key)}
                   </p>
                   {index < STATS.length - 1 && (
-                    <div className="absolute -right-4 top-1/2 hidden h-16 w-px -translate-y-1/2 bg-gradient-to-b from-transparent via-border to-transparent md:block" />
+                    <div className="absolute -right-4 top-1/2 hidden h-16 w-px -translate-y-1/2 bg-linear-to-b from-transparent via-border to-transparent md:block" />
                   )}
                 </div>
               </ScrollReveal>
