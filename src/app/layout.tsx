@@ -43,6 +43,14 @@ export default function RootLayout({
 }>) {
   return (
     <html suppressHydrationWarning>
+      <head>
+        <link
+          rel="preload"
+          as="video"
+          href="/videos/hero.webm"
+          type="video/webm"
+        />
+      </head>
       <body className={`${inter.variable} ${cairo.variable} antialiased`}>
         <StructuredData />
         {children}

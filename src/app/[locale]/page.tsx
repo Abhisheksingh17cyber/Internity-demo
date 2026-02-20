@@ -1,5 +1,5 @@
 import dynamic from "next/dynamic";
-import { HeroSection } from "@/components/home/HeroSection";
+import AdvancedCinematicHero from "@/components/AdvancedCinematicHero";
 import { ClientLogos } from "@/components/home/ClientLogos";
 import { ServicesSection } from "@/components/home/ServicesSection";
 import { FeaturedWork } from "@/components/home/FeaturedWork";
@@ -25,7 +25,7 @@ const CTASection = dynamic(
 export default function HomePage() {
   return (
     <>
-      <HeroSection />
+      <AdvancedCinematicHero />
       <ClientLogos />
       <ServicesSection />
       <InlineCTA />
