@@ -2,6 +2,7 @@ import { getTranslations } from "next-intl/server";
 import { Container } from "@/components/ui/Container";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { ProjectGrid } from "@/components/portfolio/ProjectGrid";
+import { VideoShowcase } from "@/components/portfolio/VideoShowcase";
 import { Button } from "@/components/ui/Button";
 import { ScrollReveal } from "@/components/ui/ScrollReveal";
 import { ArrowRight } from "lucide-react";
@@ -46,6 +47,8 @@ export default async function PortfolioPage() {
           <ProjectGrid projects={PLACEHOLDER_PROJECTS} />
         </Container>
       </section>
+
+      <VideoShowcase />
 
       {/* Bottom CTA */}
       <section className="border-t border-border py-24 md:py-32">

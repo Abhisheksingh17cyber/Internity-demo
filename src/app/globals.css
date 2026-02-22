@@ -188,6 +188,51 @@ select:focus {
   box-shadow: 0 0 0 1px var(--color-gold), 0 0 12px rgba(201, 168, 76, 0.15);
 }
 
+/* Hero card gold glow */
+.hero-card-glow {
+  box-shadow:
+    0 0 30px rgba(201, 168, 76, 0.12),
+    0 0 60px rgba(201, 168, 76, 0.06),
+    0 0 120px rgba(201, 168, 76, 0.03),
+    inset 0 1px 0 rgba(201, 168, 76, 0.1);
+}
+
+/* Projection beam shimmer */
+@keyframes beam-shimmer {
+  0% { opacity: 0.08; }
+  50% { opacity: 0.2; }
+  100% { opacity: 0.08; }
+}
+
+.animate-beam-shimmer {
+  animation: beam-shimmer 3s ease-in-out infinite;
+}
+
+/* Text illumination glow pulse */
+@keyframes gold-pulse {
+  0%, 100% { text-shadow: 0 0 30px rgba(201, 168, 76, 0.3); }
+  50% { text-shadow: 0 0 50px rgba(201, 168, 76, 0.5), 0 0 80px rgba(201, 168, 76, 0.2); }
+}
+
+.animate-gold-pulse {
+  animation: gold-pulse 4s ease-in-out infinite;
+}
+
+/* Recording indicator blink */
+@keyframes rec-blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.3; }
+}
+
+.animate-rec-blink {
+  animation: rec-blink 2s ease-in-out infinite;
+}
+
+/* Video showcase active glow */
+.video-active-glow {
+  box-shadow: 0 0 20px rgba(201, 168, 76, 0.08), 0 0 40px rgba(201, 168, 76, 0.04);
+}
+
 /* Reduced motion */
 @media (prefers-reduced-motion: reduce) {
   html {
